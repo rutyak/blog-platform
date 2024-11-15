@@ -1,15 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import Login from "../components/authentication/Login";
+import { Menu, MenuItem, IconButton } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Navbar() {
-  // const { user, logout } = useAuth();
-  // const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate('/');
-  // };
+  const handleProfileMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+    logout();
+    handleMenuClose();
+  };
 
   return (
     <nav className="bg-teal-600 text-white px-4 py-3 flex justify-between items-center">
@@ -17,24 +23,49 @@ function Navbar() {
         <Link to="/" className="text-xl font-semibold hover:text-teal-200">
           Home
         </Link>
-        {/* {user && ( */}
+        {user && (
           <Link to="/dashboard" className="text-lg hover:text-teal-200">
             Dashboard
           </Link>
-        {/* )} */}
+        )}
       </div>
 
       <div className="flex items-center space-x-4">
-        {/* {user ? ( */}
-          {/* <button
-            className="px-4 py-2 bg-red-500 rounded hover:bg-red-600 transition"
-          >
-            Logout
-          </button> */}
-        {/* ) : ( */}
-        {/* { user? <Drawer/> : <li><Login /></li>} */}
-        <Login/>
-        {/* )} */}
+        {user ? (
+          <div>
+            {/* Profile Icon with Menu */}
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleProfileMenuOpen}
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+            >
+              <AccountCircleIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              id="menu-appbar"
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </div>
+        ) : (
+          <Login />
+        )}
       </div>
     </nav>
   );

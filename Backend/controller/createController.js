@@ -3,7 +3,6 @@ const Post = require("../model/postSchema");
 const createController = async (req, res) => {
   const { title, content, authorId } = req.body;
 
-  console.log("data: ",title, content, authorId);
 
   try {
     const newPost = await Post.create({ title, content, authorId });

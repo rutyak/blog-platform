@@ -10,6 +10,8 @@ router.post("/create/post", createController);
 
 router.get("/fetch/post", fetchController);
 
+router.get("/fetch/post/:id", fetchController);
+
 router.put("/update/post/:id",updateController);
 
 router.delete("/delete/post/:id",deleteController);
