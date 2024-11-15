@@ -1,4 +1,4 @@
-const User = require("../model/UserSchema");
+const User = require("../model/userSchema");
 const bcrypt = require("bcrypt");
 
 const userCreateController = async (req, res) => {
