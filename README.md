@@ -64,5 +64,7 @@ Navigate to the frontend directory:
 # Important links: 
   
    Github Link : https://github.com/rutyak/blog-platform.git
+   
    Deployed Frontend Link : https://new-blog-site.netlify.app/
+   
    Deployed Backend Link : https://blog-platform-1-pd0w.onrender.com
